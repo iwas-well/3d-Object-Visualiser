@@ -1,23 +1,31 @@
 #ifndef __DATA_VISU__
 #define __DATA_VISU__
 
-struct vec3{
+#define VERTEX_NUM 150    //number of vertices which are allocated each time
+#define POLYGON_NUM 50    //number of polygons which are allocated each time
+
+typedef struct vec3{
     float x,y,z;
-}; typedef struct vec3 vec3;
+} vec3;
 
-struct vec2{
+typedef struct vec2{
     float x,y;
-}; typedef struct vec2 vec2;
+} vec2;
 
-struct polygon{
+typedef struct polygon{
     int vnum;       //specifies number of vertices of the plane
-    vec3 v[4];      //four vertices in each polygon   
-}; typedef struct polygon polygon;
+    //int* pv;         //specifies the vertices that form the polygon
+    vec3** v;      //array of pointers to the vertices that form the polygon
+} polygon;
 
-struct mesh{
+typedef struct mesh{
+    vec3* v;
     polygon* pol;
-    int pnum;       //specifies number of polygons of the mesh
-}; typedef struct mesh mesh;
+    int vnum;       //number of vertices of the mesh
+    int pnum;       //number of polygons of the mesh
+    int vmax;       //maximum number of verteces (allocated)
+    int pmax;       //maximum number of polygons (allocated)
+} mesh;
 
 struct cam{
     vec3 v;
